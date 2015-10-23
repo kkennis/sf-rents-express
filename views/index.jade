@@ -1,5 +1,34 @@
-extends layout
+html.
 
-block content
-  h1= title
-  p Welcome to #{title}
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <link rel="stylesheet" type="text/css" href="/stylesheets/sfrents.css">
+      <link rel="stylesheet" type="text/css" href="/stylesheets/graphs.css">
+    </head>
+    <body>
+    <div id="infobox"></div>
+    <div class="container">
+      <form id="current-month" method="post" action="d3.html">
+        <select id="month-select">
+        </select>
+        <input type="Submit" value="Choose Month (YYYY-MM)">
+      </form>
+    </div>
+    <div class="title-box">
+      <h1 id="page-head">San Francisco Rents: A Visual Report</h1>
+      <h4 id="get-started">To get started, choose a month. Rotate and zoom with the mouse. Click on a neighborhood for more information.</h4>
+      <button id="back-button">Back to SF</button> 
+    </div>
+
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="three.min.js"></script>
+    <script src="transformsvgpath.js"></script>
+    <script src="TrackballControls.js"></script>
+    <script src="async.js"></script>
+    <script src="sfrents.js"></script>
+    <script src="monthbuttons.js"></script>
+    </body>
+  </html>
