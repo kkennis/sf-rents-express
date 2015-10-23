@@ -1,0 +1,30 @@
+body {
+  /*font: 10px sans-serif;*/
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  /*display: none;*/
+}
+
+.line {
+  fill: none;
+  stroke: #25C2F2;
+  stroke-width: 1.5px;
+}
+
+.tick line{
+  opacity: 0.2;
+  stroke: white;
+}
+
+/*#back-button {
+  padding: 1em;
+
+}*/
