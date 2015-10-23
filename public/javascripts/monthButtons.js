@@ -34,6 +34,7 @@ $(document).ready(function(){
     $("canvas").fadeIn("slow");
     // $("#page-head").css("color", "#EEEEEE");
     $(".data-title").remove();
+    $("#infobox").show();
     $("form").show();
   });
 
@@ -53,6 +54,7 @@ $(document).ready(function(){
         var height = 1000; 
 
         $("form").hide();
+        $("#infobox").hide();
         $("canvas").fadeOut("slow");
         $("<h3 class='data-title'>"+zipCode + " (" + zip.get(name) + ")</h3>").insertAfter("#page-head");
         $("#back-button").fadeIn("slow");
