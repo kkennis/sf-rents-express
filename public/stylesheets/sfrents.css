@@ -27,21 +27,28 @@ canvas {
   z-index: -5;
 }
 
-#page-head {
+.title-box {
   position: absolute;
-  width: 25%;
   top: 1em;
-  left: 20px;
+  left: 2em;
+  width: 40%;
+}
+
+#page-head {
+  /*position: absolute;*/
+  /*width: 25%;*/
+/*  top: 1em;
+  left: 20px;*/
   text-align: left;
   color: #EEEEEE;
 }
 
 #get-started {
-  position: absolute;
-  width: 20%;
+  /*position: absolute;*/
+  /*width: 20%;*/
   text-align: left;
-  top: 10em;
-  left: 20px;
+  /*top: 10em;*/
+  /*left: 20px;*/
   color: #EEEEEE;
 }
 
