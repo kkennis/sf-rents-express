@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+  var currentMonth;
+
   var months = [
   "2010-11","2010-12","2011-01","2011-02","2011-03","2011-04","2011-05",
   "2011-06","2011-07","2011-08","2011-09","2011-10","2011-11","2011-12",
@@ -22,7 +24,7 @@ $(document).ready(function(){
 
     $("#get-started").fadeOut(1000);
 
-    var selectedMonth = $("select option:selected").val();;
+    var selectedMonth = $("select option:selected").val();
     updateMeshes(selectedMonth);
 
     currentMonth = selectedMonth;
@@ -32,7 +34,6 @@ $(document).ready(function(){
     event.preventDefault();
     $("#back-button").fadeOut("slow");
     $("canvas").fadeIn("slow");
-    // $("#page-head").css("color", "#EEEEEE");
     $(".data-title").remove();
     $("#infobox").show();
     $("form").show();
@@ -46,12 +47,11 @@ $(document).ready(function(){
     var intersects = raycaster.intersectObjects(scene.children[scene.children.length - 1].children);
     for (var i=0; i<intersects.length; i++) {
       var zipCode = intersects[i].object.userData.zipCode;
-      // console.log("Zip Code", zipCode)
       if (zipCode) {
         var zip = zips.get(zipCode);
         var margin = {top: 300, right: 20, bottom: 30, left: 50};
         var width = 1600;
-        var height = 1000; 
+        var height = 1000;
 
         $("form").hide();
         $("#infobox").hide();
@@ -68,9 +68,7 @@ $(document).ready(function(){
         var xAxis = d3.svg.axis()
                       .scale(x)
                       .orient("bottom");
-                      // .innerTickSize(-height)
-                      // .outerTickSize(0)
-                      // .tickPadding(10);
+
 
         var yAxis = d3.svg.axis()
                       .scale(y)
@@ -87,22 +85,17 @@ $(document).ready(function(){
             .attr("class", "line-graph")
             .attr("width", width)
             .attr("height", 1500)
-          .append("g")
+            .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
         var data = []
 
         zip.forEach(function(d){
-          if (d[0] === "2") { 
+          if (d[0] === "2") {
             d.month = parseDate(d);
             d.rent = zip.get(d)
 
             data.push({ month: parseDate(d), rent: zip.get(d) })
-            console.log("Month: " + parseDate(d));
-            console.log("Rent: " + zip.get(d));
-            console.log();
-            // console.log(d);
-            // console.log(zip.get(d));
           }
         });
 
@@ -134,10 +127,9 @@ $(document).ready(function(){
             .attr("class", "line")
             .attr("d", line);
 
-
         break;
       }
     }
   });
 
-}); 
+});

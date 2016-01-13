@@ -31,7 +31,7 @@ canvas {
   position: absolute;
   top: 1em;
   left: 2em;
-  width: 40%;
+  width: 800px;
 }
 
 #page-head {
@@ -54,7 +54,7 @@ canvas {
 
 .data-title {
   position: absolute;
-  width: 25%;
+  width: 500px;
   top: 10em;
   left: 20px;
   text-align: left;
@@ -63,7 +63,7 @@ canvas {
 
 #back-button {
   position: absolute;
-  width: 15%;
+  width: 200px;
   top: 11em;
   left: 20px;
   font-size: 1em;
