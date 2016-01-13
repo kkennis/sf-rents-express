@@ -443,7 +443,7 @@ function updateInfoBox() {
       var zip = zips.get(zipCode);
       // console.log("Zip: ",zip)
       var rent = zip.get(currentMonth);
-      // console.log("Rent: ",rent)
+      console.log("Rent: ",rent)
       html = zipCode + ' (' + zip.get(name) + '): $' + numberFormatter(parseInt(rent, 10)) + '/mo';
       break;
     }
