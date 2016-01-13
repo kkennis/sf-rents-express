@@ -60,7 +60,7 @@ function loadData(sources, callback){
     // Add handler to file path, creating array
     args.push(handler);
 
-    // In environment of source type (json/csv), apply the handler
+    // In context of source type (json/csv), apply the handler
     d3[source.type].apply(d3, args);
 
 
@@ -112,14 +112,14 @@ function prepareRentData(sfrents) {
 
       if (rentValue < minRent) {
         minRent = rentValue;
-      } 
-    }); 
+      }
+    });
 
     // Link the zip code with the vector of rent values
     zips.set(zipCode, datum)
   });
 
-  // Return the max rent so along with our side effects, we can have the maxRent 
+  // Return the max rent so along with our side effects, we can have the maxRent
   // value in the loadData callback
   return { minRent: minRent, maxRent: maxRent} ;
 }
@@ -175,7 +175,7 @@ function initGeometry(features) {
     // is a call to a THREE function that creates a
     // a vector out of an array of points, and the outer
     // function transforms it to an SVG path element. This
-    // is really all we need D3-threeD for! Wonder if I 
+    // is really all we need D3-threeD for! Wonder if I
     // can factor it out.
     var contour = transformSVGPath(path(feature));
 
@@ -216,8 +216,6 @@ function initThree() {
   // Lights, camera, action!
   initLights();
   initCamera();
-  // TODO: After MVP, set up trackball controls.
-
 
   // Create controls for mouse dragging - camera as first argument sets
   // target for control, renderer's DOM element is target
@@ -227,13 +225,6 @@ function initThree() {
   controls.minDistance = 5;
   controls.maxDistance = 10;
 
-  // TODO: We're up to lights and camera! Only the action remains.
-  
-
-  // camera.position.z = -62;
-
-  // camera.position.x = 1432;
-  // camera.position.y = 1201;
   // camera.position.z = -65;
   camera.up.set(-0.3079731382492934, 0.9436692395156481, -0.12099963846565401);
   camera.position.set(1450.2198796703588, 1198.6282599321983, -62.00884720697113);
@@ -246,7 +237,7 @@ function initThree() {
   animate();
 }
 
-// The fist thing initThree does is call initRenderer, so 
+// The fist thing initThree does is call initRenderer, so
 // let's define it to set up the rendering engine.
 
 function initRenderer() {
@@ -266,39 +257,20 @@ function initRenderer() {
   document.body.appendChild(renderer.domElement);
 
   // Now that we've set up the renderer, let's set the scene
-  // for the rest of THREE. 
+  // for the rest of THREE.
 }
 
 // Before the action, we need lights and camera - let's set them up.
 
 function initCamera() {
-  
-  // Start camera to view three scene - first arg is vertical view angle, second is aspect 
+
+  // Start camera to view three scene - first arg is vertical view angle, second is aspect
   // ratio (same as aspect of window here), and third and fourth are front and black plane z coordinates
   camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 10000);
 
-
-  // {x: 1432, y: 1201, z: -65}
-  // {x: 1432.453078832504, y: 1198.6191709380764, z: -62.000510281529984}
-  // {x: -0.3079731382492934, y: 0.9436692395156481, z: -0.12099963846565401}
-
-  // camera.position.set(1432.2198796703588, 1195.6282599321983, -62.00884720697113);
-
-  // camera.position.x = 1432;
-  // camera.position.y = 1201;
-  // camera.position.z = -65;
-
-  // camera.up.set(-0.3079731382492934, 0.9436692395156481, -0.12099963846565401);
-
-  // camera.rotation.set(2.753132942136272, -0.035130920564671736, -3.071904360557594);
-  // camera.rotation.set(-2.602185482068017, -0.5106756660487876, -1.1309577730941562);
-
-
-  // restoreCameraOrientation(camera);
 }
 
 function initLights() {
-
 
   // Add three lights in triangular points around scene, for drama
   var pointLight = new THREE.PointLight(0xFFFFFF);
@@ -320,8 +292,6 @@ function animate() {
   // are linked to camera)
   controls.update();
 
-
-  
   // Render the scene again after camera perspective changes
   renderer.render(scene, camera);
 
@@ -329,7 +299,7 @@ function animate() {
   updateInfoBox();
 
   // Do the animation with requestAnimationFrame
-  requestAnimationFrame(animate); 
+  requestAnimationFrame(animate);
 
 }
 
@@ -373,7 +343,7 @@ function updateMeshes(month) {
 
   meshes = zips.entries().map(function(entry) {
 
-    // Each entry is a key value pair with the zip code as 
+    // Each entry is a key value pair with the zip code as
     // key and the vector of values for each month as value.
     // We assign these to variables.
     var zipCode = entry.key;
@@ -393,7 +363,7 @@ function updateMeshes(month) {
     var color = d3.hsl(105, 1, dataColor).toString();
 
     // Build material for siding (Lambert == non-reflective)
-    var extrudeMaterial = new THREE.MeshLambertMaterial({color: color}); 
+    var extrudeMaterial = new THREE.MeshLambertMaterial({color: color});
 
     // Basic material for "top"/face of each county
     var faceMaterial = new THREE.MeshBasicMaterial({color: color});
@@ -426,7 +396,7 @@ function updateMeshes(month) {
     // TODO: Implement this. First, let's see how it works without it!
     mesh.applyMatrix(positioning);
 
-    // Translate the mesh to the level of extrusion - use negative to pull extrusion "in", and 
+    // Translate the mesh to the level of extrusion - use negative to pull extrusion "in", and
     // the extrusion iself pulls it back out
 
     // mesh.rotation.z += 0.0002;
@@ -438,7 +408,6 @@ function updateMeshes(month) {
 
     // Add mesh to scene
     pivotPoint.add(mesh);
-    // scene.add(mesh);
     // Return mesh to the map
     return mesh;
 
@@ -450,12 +419,9 @@ function updateMeshes(month) {
 }
 
 function updateInfoBox() {
-  // console.log("Updating...")
-
   // Set a raycaster from the point of the camera to where the mouse pointing
   raycaster.setFromCamera( mouse, camera );
 
-  // console.log(scene.children)
 
   // Get intersect points on the map from the raycaster
   var intersects = raycaster.intersectObjects(scene.children[scene.children.length - 1].children);
@@ -470,14 +436,14 @@ function updateInfoBox() {
   // the county's name and population
   // console.log("Intersects: ", intersects)
   for (var i=0; i<intersects.length; i++) {
-    
+
     var zipCode = intersects[i].object.userData.zipCode;
     // console.log("Zip Code", zipCode)
     if (zipCode) {
       var zip = zips.get(zipCode);
       // console.log("Zip: ",zip)
       var rent = zip.get(currentMonth);
-      // console.log("Rent: ",rent) 
+      // console.log("Rent: ",rent)
       html = zipCode + ' (' + zip.get(name) + '): $' + numberFormatter(parseInt(rent, 10)) + '/mo';
       break;
     }
@@ -489,14 +455,10 @@ function updateInfoBox() {
 
 // Listener set up so camera and renderer responds to window resizing
 function onWindowResize() {
-
-  // For responsive design - change camera aspect as 
+  // For responsive design - change camera aspect
   camera.aspect = window.innerWidth / window.innerHeight;
-
   // Update projection engine with new aspect settings
   camera.updateProjectionMatrix();
-
-
   // Just like camera, update renderer to render only to size of window.
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
@@ -505,7 +467,4 @@ document.addEventListener('mousemove', onDocumentMouseMove);
 window.addEventListener('resize', onWindowResize);
 // Just display the most recent meshes for now. We shall React!
 
-// TODO: Make the rest work! You're so close.
-
-// React Layer -- this doesn't count
 
